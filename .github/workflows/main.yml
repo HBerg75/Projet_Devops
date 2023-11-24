@@ -38,4 +38,4 @@ jobs:
 
     # Push de l'image Docker
     - name: Push Docker Image
-      run: docker push projet-devops:${{ github.sha }}
+      run: docker push projet_devops:${{ github.sha }}
