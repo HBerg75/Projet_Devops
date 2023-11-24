@@ -27,7 +27,7 @@ jobs:
 
     # Construction de l'image Docker
     - name: Build Docker Image
-      run: docker build -t projet_pevops:${{ github.sha }} .
+      run: docker build -t projet_devops:${{ github.sha }} .
 
     # Connexion au Docker Hub (ou autre registre)
     - name: Login to Docker Hub
@@ -38,4 +38,4 @@ jobs:
 
     # Push de l'image Docker
     - name: Push Docker Image
-      run: docker push projet-pevops:${{ github.sha }}
+      run: docker push projet-devops:${{ github.sha }}
