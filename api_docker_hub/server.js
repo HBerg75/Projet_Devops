@@ -13,7 +13,7 @@ async function checkForNewDockerImage() {
     }
 }
 
-setInterval(checkForNewDockerImage, 300000);
+setInterval(checkForNewDockerImage, 4000);
 
 app.listen(port, () => {
     console.log(`Serveur lancé sur http://localhost:${port}`);
