@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projet-devops
+  labels:
+    app: projet-devops
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: projet-devops
+  template:
+    metadata:
+      labels:
+        app: projet-devops
+    spec:
+      containers:
+      - name: projet-devops
+        image: hberg75/projet_devops:c1b004f26aae057abfe279bc66e6b42157da6768
+        ports:
+        - containerPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: projet-devops
+spec:
+  selector:
+    app: projet-devops
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer

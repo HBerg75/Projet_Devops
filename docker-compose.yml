@@ -1,0 +1,41 @@
+version: '3'
+services:
+  sonarqube:
+    image: sonarqube:latest
+    ports:
+      - "9000:9000"
+    networks:
+      - sonarnet
+    environment:
+      - SONARQUBE_HOME=/opt/sonarqube
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
+      - sonarqube_temp:/opt/sonarqube/temp
+
+  sonarscanner:
+    image: newtmitch/sonar-scanner:latest
+    depends_on:
+      - sonarqube
+    networks:
+      - sonarnet
+    environment:
+      - SONAR_HOST_URL=http://sonarqube:9000
+    volumes:
+      - .:/usr/src
+    command: >
+      sonar-scanner
+      -Dsonar.projectKey="Project_CICD"
+      -Dsonar.sources=.
+      -Dsonar.host.url=http://sonarqube:9000
+      -Dsonar.login=sqp_c093470780afd4e07c34ce6f98395aa00fc1104a
+
+networks:
+  sonarnet:
+
+volumes:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:
+  sonarqube_temp:
